@@ -425,7 +425,7 @@
   }
 }
 
-a[href$="/progress"] {
+a[href$="/progress"] a[href$="/dates"] {
    display: none;
 }
 
