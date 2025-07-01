@@ -12,8 +12,6 @@ import ReactDOM from 'react-dom';
 import { Routes, Route } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
-import { fetchDiscussionTab, fetchLiveTab } from './course-home/data/thunks';
-import DiscussionTab from './course-home/discussion-tab/DiscussionTab';
 
 import messages from './i18n';
 import { UserMessagesProvider } from './generic/user-messages';
@@ -23,17 +21,14 @@ import OutlineTab from './course-home/outline-tab';
 import { CourseExit } from './courseware/course/course-exit';
 import CoursewareContainer from './courseware';
 import CoursewareRedirectLandingPage from './courseware/CoursewareRedirectLandingPage';
-import DatesTab from './course-home/dates-tab';
 import GoalUnsubscribe from './course-home/goal-unsubscribe';
-import ProgressTab from './course-home/progress-tab/ProgressTab';
 import { TabContainer } from './tab-page';
 
-import { fetchDatesTab, fetchOutlineTab, fetchProgressTab } from './course-home/data';
+import {  fetchOutlineTab } from './course-home/data';
 import { fetchCourse } from './courseware/data';
 import initializeStore from './store';
 import NoticesProvider from './generic/notices';
 import PathFixesProvider from './generic/path-fixes';
-import LiveTab from './course-home/live-tab/LiveTab';
 import CourseAccessErrorPage from './generic/CourseAccessErrorPage';
 import DecodePageRoute from './decode-page-route';
 import { DECODE_ROUTES, ROUTES } from './constants';
@@ -64,54 +59,6 @@ subscribe(APP_READY, () => {
                   </DecodePageRoute>
               )}
               />
-              <Route
-                path={DECODE_ROUTES.LIVE}
-                element={(
-                  <DecodePageRoute>
-                    <TabContainer tab="lti_live" fetch={fetchLiveTab} slice="courseHome">
-                      <LiveTab />
-                    </TabContainer>
-                  </DecodePageRoute>
-                )}
-              />
-              <Route
-                path={DECODE_ROUTES.DATES}
-                element={(
-                  <DecodePageRoute>
-                    <TabContainer tab="dates" fetch={fetchDatesTab} slice="courseHome">
-                      <DatesTab />
-                    </TabContainer>
-                  </DecodePageRoute>
-                )}
-              />
-              <Route
-                path={DECODE_ROUTES.DISCUSSION}
-                element={(
-                  <DecodePageRoute>
-                    <TabContainer tab="discussion" fetch={fetchDiscussionTab} slice="courseHome">
-                      <DiscussionTab />
-                    </TabContainer>
-                  </DecodePageRoute>
-                )}
-              />
-              {DECODE_ROUTES.PROGRESS.map((route) => (
-                <Route
-                  key={route}
-                  path={route}
-                  element={(
-                    <DecodePageRoute>
-                      <TabContainer
-                        tab="progress"
-                        fetch={fetchProgressTab}
-                        slice="courseHome"
-                        isProgressTab
-                      >
-                        <ProgressTab />
-                      </TabContainer>
-                    </DecodePageRoute>
-                  )}
-                />
-              ))}
               <Route
                 path={DECODE_ROUTES.COURSE_END}
                 element={(
